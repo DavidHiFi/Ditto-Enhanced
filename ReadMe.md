@@ -62,3 +62,19 @@ Build with the VS 2022 toolset (upstream projects now target v145):
 ```
 msbuild CP_Main_10.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 ```
+
+## Contributing
+
+This repo is a fork of [sabrogden/Ditto](https://github.com/sabrogden/Ditto). Bug reports and pull requests belong upstream at https://github.com/sabrogden/Ditto. Issues are disabled on this fork.
+
+## Star history
+
+⭐ Thanks for the stars, frosted-window reports and fixes.
+
+<a href="https://www.star-history.com/?repos=DavidHiFi%2FDitto-Enhanced&amp;type=date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=DavidHiFi/Ditto-Enhanced&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=DavidHiFi/Ditto-Enhanced&amp;type=date" />
+    <img alt="DavidHiFi/Ditto-Enhanced GitHub star history" src="https://api.star-history.com/chart?repos=DavidHiFi/Ditto-Enhanced&amp;type=date" />
+  </picture>
+</a>
