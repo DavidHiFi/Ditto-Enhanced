@@ -1,75 +1,72 @@
-# [Ditto - Clipboard Manager](https://github.com/sabrogden/Ditto/releases/download/3.25.113.0/DittoSetup_3_25_113_0.exe)
+<div align="center">
 
-![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/sabrogden/Ditto/latest/total) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/sabrogden/Ditto/latest) ![GitHub contributors](https://img.shields.io/github/contributors/sabrogden/Ditto)
+<img src="https://socialify.git.ci/DavidHiFi/Ditto-Enhanced/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Plus&theme=Dark" alt="Ditto-Enhanced by DavidHiFi" width="100%">
 
+# Ditto-Enhanced
 
+**A personal fork of Ditto that renders the quick-paste window as a rounded, frosted acrylic surface.**
 
-[Help/Wiki](https://github.com/sabrogden/Ditto/wiki)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[Forums](https://github.com/sabrogden/Ditto/issues)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[Donate](https://www.paypal.com/donate/?item_name=Donation+to+Ditto&cmd=_donations&business=sabrogden%40gmail.com&Z3JncnB0=)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[Beta](https://ditto-cp.sourceforge.io/beta/)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[Source](https://github.com/sabrogden/Ditto)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[History](https://github.com/sabrogden/Ditto/releases)
+Frosted acrylic over the active theme, rounded controls, black-fill backdrops for DWM acrylic, immersive dark, and a rebuilt frosted state on every popup so full-screen games and Windhawk resets heal instantly.
 
-Ditto is an extension to the standard windows clipboard. It saves each item placed on the clipboard allowing you access to any of those items at a later time. Ditto allows you to save any type of information that can be put on the clipboard, text, images, html, custom formats.
+<a href="#installation">
+<img src="https://img.shields.io/badge/%F0%9F%93%96%20INSTALL%20GUIDE-2EA043?style=for-the-badge&labelColor=161B22" alt="Read the install guide" height="42">
+</a>
 
+<br><br>
 
-1. [Installer](https://github.com/sabrogden/Ditto/releases/download/3.25.113.0/DittoSetup_3_25_113_0.exe)
-2. [Portable](https://github.com/sabrogden/Ditto/releases/download/3.25.113.0/DittoPortable_3_25_113_0.zip)
-3. [Chocolatey](https://chocolatey.org/packages/ditto/3.23.124.0) choco install ditto
-4. [Chocolatey Portable](https://chocolatey.org/packages/ditto.portable/3.23.124.0) choco install ditto.portable
-5. [Winget](https://winget.run/pkg/Ditto/Ditto) winget install -e --id Ditto.Ditto
-6. [Windows Store App](https://www.microsoft.com/en-us/store/p/ditto-cp/9nblggh3zbjq)  
+<img src="https://img.shields.io/github/license/DavidHiFi/Ditto-Enhanced?style=flat-square&label=license&color=8957E5&labelColor=161B22" alt="License">
+<img src="https://img.shields.io/badge/platform-Windows-DB6D28?style=flat-square&labelColor=161B22" alt="Platform: Windows">
 
+</div>
 
-## Basic Usage
+---
 
-1. Run Ditto
-2. Copy things to the clipboard, e.g. using Ctrl-C with text selected in a text editor.
-3. Open Ditto by clicking its icon in the system tray or by pressing its Hot Key which defaults to Ctrl + ` – i.e. hold down Ctrl and press the back-quote (tilde ~) key.
-4. Double click or press enter on the item to paste it to the previous window.
+## Installation
 
-## Local First
-- No login
-- No cloud
-- No telemetry
+1. Download the upstream [Ditto installer](https://github.com/sabrogden/Ditto/releases/download/3.25.113.0/DittoSetup_3_25_113_0.exe) or the portable zip from the upstream release page.
+2. Replace the upstream binary with this fork's build from the repository ZIP, or build from source (see below).
 
-## Windows Code-Signing Policy
-Free code signing on Windows binaries provided by SignPath.io, certificate by SignPath Foundation.
-<br>
-<br>
+The upstream release is MIT licensed. This fork keeps upstream's GPL-3.0 terms.
 
-<img src="ditto.gif">
+> [!NOTE]
+> **In development.** This fork modifies the quick-paste window's rendering and does not publish its own releases yet. Follow the upstream install guide and replace the binary with the build from this repo.
 
+---
 
-## This fork: frosted (mica) rice
+## Features
 
-A personal fork of Ditto that renders the quick-paste window as a rounded,
-frosted acrylic surface over the active theme:
-
-- Windows 11 rounded corners, plus an acrylic backdrop tinted with the theme's
-  `MainWindowBG` color.
-- Background fills paint black in this mode. DWM treats black pixels in an
-  acrylic window as unpainted, which reveals the backdrop and clears stale paint.
-- The window is marked as immersive dark so DWM builds the dark material.
-- The stock square caption border is skipped in this mode: its corners were
-  square-drawn and got clipped away by the window's rounded arcs at every
-  corner. The frosted backdrop draws its own corner-fitting outline instead.
-- The frosted state rebuilds itself every time the popup shows, so the
-  fullscreen-game and Windhawk state resets that used to leave the popup flat
-  or see-through no longer need a restart to heal.
+- Frosted acrylic quick-paste window with rounded corners.
+- Black-fill backdrop for DWM acrylic transparency.
+- Immersive dark mode and rebuilt frosted state on every popup.
 - `DITTO_NO_RICE=1` launches with the original solid look.
 
-Everything else is upstream Ditto, unchanged. Upstream's GPL-3.0 license is kept.
+## Building from source
 
-Build with the VS 2022 toolset (upstream projects now target v145):
+Requires VS 2022 with the v143 toolset.
 
-```
+```powershell
 msbuild CP_Main_10.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 ```
 
+---
+
+## Support development
+
+This project is a free personal fork. A coffee keeps it moving.
+
+[![Support DavidHiFi on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/davidhifi)
+
 ## Contributing
 
-This repo is a fork of [sabrogden/Ditto](https://github.com/sabrogden/Ditto). Bug reports and pull requests belong upstream at https://github.com/sabrogden/Ditto. Issues are disabled on this fork.
+Bug reports and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and checks.
+
+<a href="CONTRIBUTING.md">
+<img src="https://img.shields.io/badge/%F0%9F%A4%9D%20HOW%20TO%20CONTRIBUTE-8957E5?style=for-the-badge&labelColor=161B22" alt="How to contribute" height="36">
+</a>
 
 ## Star history
 
-⭐ Thanks for the stars, frosted-window reports and fixes.
+Thank you to everyone using this fork and reporting frosted-window fixes.
 
 <a href="https://www.star-history.com/?repos=DavidHiFi%2FDitto-Enhanced&amp;type=date">
   <picture>
@@ -78,3 +75,21 @@ This repo is a fork of [sabrogden/Ditto](https://github.com/sabrogden/Ditto). Bu
     <img alt="DavidHiFi/Ditto-Enhanced GitHub star history" src="https://api.star-history.com/chart?repos=DavidHiFi/Ditto-Enhanced&amp;type=date" />
   </picture>
 </a>
+
+## Credits
+
+- **Author:** Myself, [DavidHiFi](https://github.com/DavidHiFi)
+- Upstream: [sabrogden/Ditto](https://github.com/sabrogden/Ditto), GPL-3.0
+
+Built on Windows with Visual Studio 2022 and MSBuild.
+
+> Missing or wrong credit? [Open an issue](https://github.com/DavidHiFi/Ditto-Enhanced/issues/new) and I'll fix it.
+
+## Disclaimers
+
+Most of this project's modifications were developed with AI coding agents, including Claude Code, Codex and OpenCode. No single AI agent made the project. The upstream Ditto code is by its original authors.
+
+<div align="center">
+<br>
+<sub>Not affiliated with sabrogden. This is an independent personal fork. Requires Windows and the upstream Ditto base.</sub>
+</div>
