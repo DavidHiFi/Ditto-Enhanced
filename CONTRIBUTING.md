@@ -16,4 +16,4 @@ Open an issue at https://github.com/DavidHiFi/Ditto-Enhanced/issues/new and incl
 2. Build with VS 2022: `msbuild CP_Main_10.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143`.
 3. Keep each pull request to one change, and say how you tested it.
 
-By contributing, you agree that your work is released under this repo's GPL-3.0-or-later license. See LICENSE.
+By contributing, you agree that your work is released under this repo's [GPL-3.0 license](LICENSE).

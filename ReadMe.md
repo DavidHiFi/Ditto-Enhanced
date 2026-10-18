@@ -4,18 +4,19 @@
 
 # Ditto-Enhanced
 
-**A personal fork of Ditto that renders the quick-paste window as a rounded, frosted acrylic surface.**
+**A fork of the [Ditto](https://github.com/sabrogden/Ditto) clipboard manager with a rounded, frosted acrylic quick-paste window for Windows 11.**
 
-Frosted acrylic over the active theme, rounded controls, black-fill backdrops for DWM acrylic, immersive dark, and a rebuilt frosted state on every popup so full-screen games and Windhawk resets heal instantly.
+Everything else is stock Ditto.
 
-<a href="#installation">
-<img src="https://img.shields.io/badge/%F0%9F%93%96%20INSTALL%20GUIDE-2EA043?style=for-the-badge&labelColor=161B22" alt="Read the install guide" height="42">
+<a href="https://github.com/DavidHiFi/Ditto-Enhanced/releases/latest">
+<img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20DOWNLOAD%20LATEST%20RELEASE-2EA043?style=for-the-badge&labelColor=161B22" alt="Download the latest release" height="42">
 </a>
 
 <br><br>
 
-<img src="https://img.shields.io/github/license/DavidHiFi/Ditto-Enhanced?style=flat-square&label=license&color=8957E5&labelColor=161B22" alt="License">
-<img src="https://img.shields.io/badge/platform-Windows-DB6D28?style=flat-square&labelColor=161B22" alt="Platform: Windows">
+<img src="https://img.shields.io/github/v/release/DavidHiFi/Ditto-Enhanced?style=flat-square&label=version&color=8957E5&labelColor=161B22" alt="Latest version">
+<img src="https://img.shields.io/github/downloads/DavidHiFi/Ditto-Enhanced/total?style=flat-square&label=downloads&color=1F6FEB&labelColor=161B22" alt="Total downloads">
+<img src="https://img.shields.io/badge/platform-Windows%2011-DB6D28?style=flat-square&labelColor=161B22" alt="Platform: Windows 11">
 
 </div>
 
@@ -23,42 +24,47 @@ Frosted acrylic over the active theme, rounded controls, black-fill backdrops fo
 
 ## Installation
 
-1. Download the upstream [Ditto installer](https://github.com/sabrogden/Ditto/releases/download/3.25.113.0/DittoSetup_3_25_113_0.exe) or the portable zip from the upstream release page.
-2. Replace the upstream binary with this fork's build from the repository ZIP, or build from source (see below).
+1. Install Ditto from the [upstream release](https://github.com/sabrogden/Ditto/releases/latest), or use an install you already have.
+2. Quit Ditto.
+3. Download `Ditto.exe` from the [latest release](https://github.com/DavidHiFi/Ditto-Enhanced/releases/latest) and replace the one in your Ditto folder. Windows asks for admin rights when Ditto is in Program Files.
+4. Start Ditto.
 
-The upstream release is MIT licensed. This fork keeps upstream's GPL-3.0 terms.
-
-> [!NOTE]
-> **In development.** This fork modifies the quick-paste window's rendering and does not publish its own releases yet. Follow the upstream install guide and replace the binary with the build from this repo.
-
----
+To go back to the stock look, set the environment variable `DITTO_NO_RICE=1` and restart Ditto.
 
 ## Features
 
-- Frosted acrylic quick-paste window with rounded corners.
-- Black-fill backdrop for DWM acrylic transparency.
-- Immersive dark mode and rebuilt frosted state on every popup.
-- `DITTO_NO_RICE=1` launches with the original solid look.
+- **Rounded corners:** the quick-paste window uses Windows 11's rounded corners.
+- **Frosted backdrop:** acrylic blur tinted with your Ditto theme's background colour.
+- **Dark material:** the window asks Windows for the dark version of the blur.
+- **Clean corners:** the square caption border is skipped, so the corners are not clipped.
+- **Self-healing:** the frosted look rebuilds every time the window opens, so fullscreen games and Windhawk resets no longer leave it flat or see-through.
 
-## Building from source
+<details>
+<summary><b>Building from source</b></summary>
 
-Requires VS 2022 with the v143 toolset.
+<br>
+
+Needs Visual Studio 2022 with the v143 toolset. Upstream projects now target v145, so pass the toolset explicitly:
 
 ```powershell
 msbuild CP_Main_10.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 ```
 
+</details>
+
 ---
 
 ## Support development
 
-This project is a free personal fork. A coffee keeps it moving.
+This fork is free and always will be. If you like the frosted look, a coffee keeps it going.
 
 [![Support DavidHiFi on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/davidhifi)
 
+Ditto itself is made by Scott Brogden. You can also [support Ditto upstream](https://www.paypal.com/donate/?item_name=Donation+to+Ditto&cmd=_donations&business=sabrogden%40gmail.com).
+
 ## Contributing
 
-Bug reports and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and checks.
+Report problems with the frosted window here. Bugs in Ditto itself belong [upstream](https://github.com/sabrogden/Ditto/issues).
 
 <a href="CONTRIBUTING.md">
 <img src="https://img.shields.io/badge/%F0%9F%A4%9D%20HOW%20TO%20CONTRIBUTE-8957E5?style=for-the-badge&labelColor=161B22" alt="How to contribute" height="36">
@@ -66,7 +72,7 @@ Bug reports and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md
 
 ## Star history
 
-Thank you to everyone using this fork and reporting frosted-window fixes.
+Thanks for the stars and the frosted-window reports.
 
 <a href="https://www.star-history.com/?repos=DavidHiFi%2FDitto-Enhanced&amp;type=date">
   <picture>
@@ -78,18 +84,23 @@ Thank you to everyone using this fork and reporting frosted-window fixes.
 
 ## Credits
 
-- **Author:** Myself, [DavidHiFi](https://github.com/DavidHiFi)
-- Upstream: [sabrogden/Ditto](https://github.com/sabrogden/Ditto), GPL-3.0
+- **Author of this fork:** Myself, [DavidHiFi](https://github.com/DavidHiFi)
 
-Built on Windows with Visual Studio 2022 and MSBuild.
+| Who | What |
+|---|---|
+| **Scott Brogden and contributors** ([Ditto](https://github.com/sabrogden/Ditto), GPL-3.0) | The whole clipboard manager. This fork only changes how the quick-paste window is drawn. |
+
+Built on [Ditto](https://github.com/sabrogden/Ditto), with [Visual Studio 2022](https://visualstudio.microsoft.com/vs/), [MFC](https://learn.microsoft.com/cpp/mfc/mfc-desktop-applications) and the [Windows DWM API](https://learn.microsoft.com/windows/win32/dwm/dwm-overview).
 
 > Missing or wrong credit? [Open an issue](https://github.com/DavidHiFi/Ditto-Enhanced/issues/new) and I'll fix it.
 
 ## Disclaimers
 
-Most of this project's modifications were developed with AI coding agents, including Claude Code, Codex and OpenCode. No single AI agent made the project. The upstream Ditto code is by its original authors.
+The changes in this fork were developed with AI coding agents, including Claude Code, Codex and OpenCode. No single AI agent made the project. Ditto itself is the work of its original authors, and this fork keeps its GPL-3.0 license.
+
+This build is not signed. Windows SmartScreen may warn the first time you run it.
 
 <div align="center">
 <br>
-<sub>Not affiliated with sabrogden. This is an independent personal fork. Requires Windows and the upstream Ditto base.</sub>
+<sub>Not affiliated with the Ditto project. Requires Windows 11.</sub>
 </div>
