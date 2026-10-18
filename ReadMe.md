@@ -52,16 +52,6 @@ msbuild CP_Main_10.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformTools
 
 </details>
 
----
-
-## Support development
-
-This fork is free and always will be. If you like the frosted look, a coffee keeps it going.
-
-[![Support DavidHiFi on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/davidhifi)
-
-Ditto itself is made by Scott Brogden. You can also [support Ditto upstream](https://www.paypal.com/donate/?item_name=Donation+to+Ditto&cmd=_donations&business=sabrogden%40gmail.com).
-
 ## Contributing
 
 Report problems with the frosted window here. Bugs in Ditto itself belong [upstream](https://github.com/sabrogden/Ditto/issues).
