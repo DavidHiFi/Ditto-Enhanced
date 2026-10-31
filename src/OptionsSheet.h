@@ -59,11 +59,17 @@ protected:
 
 	//CShowTaskBarIcon m_taskBar;
 
+	CBrush m_backgroundBrush;
+	COLORREF m_backgroundColor;
+	CBrush &BackgroundBrush();
+
 
 	//{{AFX_MSG(COptionsSheet)
 		// NOTE - the ClassWizard will add and remove member functions here.
 	afx_msg void OnDestroy();
 	afx_msg void OnNcDestroy();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

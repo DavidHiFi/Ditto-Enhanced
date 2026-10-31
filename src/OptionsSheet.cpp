@@ -44,6 +44,7 @@ COptionsSheet::COptionsSheet(LPCTSTR pszCaption, CWnd* pParentWnd, UINT iSelectP
 	
 	m_pUtilites = NULL;
 	m_hWndParent = NULL;
+	m_backgroundColor = CLR_INVALID;
 
 	EnableStackedTabs(TRUE);
 
@@ -93,6 +94,8 @@ BEGIN_MESSAGE_MAP(COptionsSheet, CPropertySheet)
 		// NOTE - the ClassWizard will add and remove mapping macros here.
 	ON_WM_DESTROY()
 	ON_WM_NCDESTROY()
+	ON_WM_ERASEBKGND()
+	ON_WM_CTLCOLOR()
 	//ON_WM_CLOSE()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -130,6 +133,40 @@ BOOL COptionsSheet::OnInitDialog()
 	m_nFlags &= ~WF_CONTINUEMODAL;
 
 	return bResult;
+}
+
+// The sheet's margins (above the tabs, beside them, around OK/Cancel) are
+// painted with the COLOR_BTNFACE brush by default. Windowing mods that recolour
+// system colours for acrylic (Windhawk translucent-windows) turn that brush
+// black, and with no backdrop behind the sheet the margins render pitch black.
+// Paint them with the Ditto theme background through our own brush instead.
+CBrush &COptionsSheet::BackgroundBrush()
+{
+	COLORREF color = CGetSetOptions::m_Theme.MainWindowBG();
+	if (color != m_backgroundColor || m_backgroundBrush.GetSafeHandle() == NULL)
+	{
+		m_backgroundBrush.DeleteObject();
+		m_backgroundBrush.CreateSolidBrush(color);
+		m_backgroundColor = color;
+	}
+	return m_backgroundBrush;
+}
+
+BOOL COptionsSheet::OnEraseBkgnd(CDC* pDC)
+{
+	CRect rc;
+	GetClientRect(rc);
+	pDC->FillRect(rc, &BackgroundBrush());
+	return TRUE;
+}
+
+HBRUSH COptionsSheet::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	if (nCtlColor == CTLCOLOR_DLG)
+	{
+		return (HBRUSH)BackgroundBrush().GetSafeHandle();
+	}
+	return CPropertySheet::OnCtlColor(pDC, pWnd, nCtlColor);
 }
 
 void COptionsSheet::OnNcDestroy()
