@@ -176,6 +176,7 @@ protected:
 		
 	void DrawCheckerboard(CDC* pDC, CRect rect);
 	COLORREF RowSeparatorColor();
+	void DrawRoundedSelection(CDC* pDC, const CRect& rcItem, COLORREF crFill);
 	WCHAR *m_pwchTip;
 	TCHAR *m_pchTip;
 	HFONT m_SmallFont;
@@ -199,6 +200,7 @@ protected:
 	CString m_searchText;
 	BOOL m_showIfClipWasPasted;
 	BOOL m_bShowRowSeparators;
+	BOOL m_bRoundedSelection;
 	CAccels *m_pToolTipActions;
 	CRichEditCtrlEx m_rtfFormater;
 	CDPI *m_windowDpi;

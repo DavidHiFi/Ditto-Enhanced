@@ -27,6 +27,9 @@ static char THIS_FILE[] = __FILE__;
 
 #define ROW_BOTTOM_BORDER		4
 #define ROW_LEFT_BORDER			3
+#define ROUNDED_SELECTION_RADIUS	8
+#define ROUNDED_SELECTION_INSET_X	0
+#define ROUNDED_SELECTION_INSET_Y	2
 #define COLOR_SHADOW			RGB(245, 245, 245)
 #define DUMMY_COL_WIDTH			2
 
@@ -214,6 +217,7 @@ CQListCtrl::CQListCtrl()
 	m_showIfClipWasPasted = TRUE;
 	m_bShowTextForFirstTenHotKeys = true;
 	m_bShowRowSeparators = true;
+	m_bRoundedSelection = true;
 	m_pToolTipActions = NULL;
 }
 
@@ -510,10 +514,25 @@ void CQListCtrl::OnCustomdrawList(NMHDR* pNMHDR, LRESULT* pResult)
 			}
 		}
 
-		if (DittoRiceEnabled() && DittoWindowIsRiced(m_hWnd) && (rItem.state & LVIS_SELECTED) == 0)
+		bool bRiced = DittoRiceEnabled() && DittoWindowIsRiced(m_hWnd);
+		if (bRiced && (rItem.state & LVIS_SELECTED) == 0)
 		{
 			// Unselected rows are left transparent so the frosted backdrop shows through.
 			DittoRiceFillRect(pDC, rcItem);
+		}
+		else if ((rItem.state & LVIS_SELECTED) && m_bRoundedSelection)
+		{
+			// The selection is a rounded card. Paint the row the way an unselected row is
+			// painted first, so the corners outside the card match the rest of the list.
+			if (bRiced)
+			{
+				DittoRiceFillRect(pDC, rcItem);
+			}
+			else
+			{
+				pDC->FillSolidRect(rcItem, (nItem % 2) == 0 ? CGetSetOptions::m_Theme.ListBoxOddRowsBG() : CGetSetOptions::m_Theme.ListBoxEvenRowsBG());
+			}
+			DrawRoundedSelection(pDC, rcItem, crBkgnd);
 		}
 		else
 		{
@@ -818,6 +837,38 @@ static COLORREF OklchToRgb(double l, double c, double h)
 	return RGB(R, G, B);
 }
 
+
+void CQListCtrl::DrawRoundedSelection(CDC* pDC, const CRect& rcItem, COLORREF crFill)
+{
+	// Anti-aliased rounded card. GDI+ is already used for images, so no new dependency.
+	CRect rcCard = rcItem;
+	rcCard.DeflateRect(m_windowDpi->Scale(ROUNDED_SELECTION_INSET_X), m_windowDpi->Scale(ROUNDED_SELECTION_INSET_Y));
+
+	REAL nWidth = (REAL)rcCard.Width();
+	REAL nHeight = (REAL)rcCard.Height();
+	if (nWidth <= 0 || nHeight <= 0)
+		return;
+
+	REAL nRadius = (std::min)((REAL)m_windowDpi->Scale(ROUNDED_SELECTION_RADIUS), (std::min)(nWidth, nHeight) / 2);
+	REAL nDiameter = nRadius * 2;
+	REAL nLeft = (REAL)rcCard.left;
+	REAL nTop = (REAL)rcCard.top;
+
+	Gdiplus::GraphicsPath path;
+	path.AddArc(nLeft, nTop, nDiameter, nDiameter, 180, 90);
+	path.AddArc(nLeft + nWidth - nDiameter, nTop, nDiameter, nDiameter, 270, 90);
+	path.AddArc(nLeft + nWidth - nDiameter, nTop + nHeight - nDiameter, nDiameter, nDiameter, 0, 90);
+	path.AddArc(nLeft, nTop + nHeight - nDiameter, nDiameter, nDiameter, 90, 90);
+	path.CloseFigure();
+
+	Gdiplus::Graphics graphics(pDC->GetSafeHdc());
+	graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+	// Half offset keeps the straight edges on whole pixels; without it GDI+ blends each edge into two rows.
+	graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHalf);
+
+	Gdiplus::SolidBrush brush(Gdiplus::Color(255, GetRValue(crFill), GetGValue(crFill), GetBValue(crFill)));
+	graphics.FillPath(&brush, &path);
+}
 
 COLORREF CQListCtrl::RowSeparatorColor()
 {
